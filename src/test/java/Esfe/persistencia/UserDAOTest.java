@@ -175,7 +175,6 @@ class UserDAOTest {
         testUser.setPasswordHash("new_password"); // **Importante:** Actualiza el objeto 'testUser' con la *nueva* contraseña para la siguiente verificación.
         autenticate(testUser); // Verifica que la autenticación sea exitosa con la *nueva* contraseña.
 
-
         // Llama al método 'delete' para eliminar el usuario de prueba de la base de datos y verifica la eliminación.
         delete(testUser);
     }
