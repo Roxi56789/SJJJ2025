@@ -44,7 +44,7 @@ public class UserDAO {
             ps.setString(1, user.getName()); // Asignar el nombre del usuario.
             ps.setString(2, passwordHasher.hashPassword(user.getPasswordHash())); // Hashear la contraseña antes de guardarla.
             ps.setString(3, user.getEmail()); // Asignar el correo electrónico del usuario.
-            ps.setString(4, user.setStatus());   // Asignar el estado del usuario.
+            ps.setByte(4, user.getStatus());   // Asignar el estado del usuario.
 
             // Ejecutar la sentencia de inserción y obtener el número de filas afectadas.
             int affectedRows = ps.executeUpdate();
