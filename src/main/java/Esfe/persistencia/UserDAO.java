@@ -188,7 +188,7 @@ public class UserDAO {
             // Iterar a través de cada fila del resultado.
             while (rs.next()){
                 // Crear un nuevo objeto User para cada registro encontrado.
-                User user = new User();
+                User user = new User("admin", "12345", "admin@gmail.com");
                 // Asignar los valores de las columnas a los atributos del objeto User.
                 user.setId(rs.getInt(1));       // Obtener el ID del usuario.
                 user.setName(rs.getString(2));   // Obtener el nombre del usuario.
@@ -221,7 +221,7 @@ public class UserDAO {
      * durante la obtención del usuario.
      */
     public User getById(int id) throws SQLException{
-        User user  = new User(); // Inicializar un objeto User que se retornará.
+        User user  = new User("admin", "12345", "admin@gmail.com"); // Inicializar un objeto User que se retornará.
 
         try {
             // Preparar la sentencia SQL para seleccionar un usuario por su ID.
@@ -276,7 +276,7 @@ public class UserDAO {
      */
     public User authenticate(User user) throws SQLException{
 
-        User userAutenticate = new User(); // Inicializar un objeto User para almacenar el usuario autenticado.
+        User userAutenticate = new User("admin", "12345", "admin@gmail.com"); // Inicializar un objeto User para almacenar el usuario autenticado.
 
         try {
             // Preparar la sentencia SQL para seleccionar un usuario por su correo electrónico,
