@@ -7,8 +7,25 @@ public class User {
     private String email;
     private byte status;
 
-    public User(String admin, String number, String mail) {
+    // *** CONSTRUCTOR VACÍO AÑADIDO (PARA RESOLVER EL ERROR EN LoginForm.java) ***
+    public User() {
+        // Puedes inicializar valores por defecto aquí si lo deseas, por ejemplo:
+        // this.id = 0;
+        // this.name = "";
+        // this.passwordHash = "";
+        // this.email = "";
+        // this.status = 0; // O un valor por defecto que tenga sentido
+    }
 
+    public User(String admin, String number, String mail) {
+        // Es importante que este constructor inicialice los atributos de la clase.
+        // Actualmente, este constructor no asigna los parámetros a los atributos de la clase.
+        // Si estos parámetros corresponden a 'name', 'passwordHash', 'email' respectivamente,
+        // deberías hacer algo como:
+        // this.name = admin;
+        // this.passwordHash = number; // ¿Estás seguro de que 'number' es passwordHash?
+        // this.email = mail;
+        // También considera inicializar 'id' y 'status' si son relevantes.
     }
 
     public User(int id, String name, String passwordHash, String email, byte status) {
@@ -19,7 +36,7 @@ public class User {
         this.status = status;
     }
 
-    public User(int id, String admin, String number, String mail)
+
 
 
     public int getId() {

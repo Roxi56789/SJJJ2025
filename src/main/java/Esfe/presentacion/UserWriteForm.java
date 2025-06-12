@@ -1,0 +1,13 @@
+package Esfe.presentacion;
+
+import javax.swing.*;
+
+public class UserWriteForm extends JDialog {
+    private JPanel mainPanel;
+    private JTextField txtName;
+    private JTextField txtEmail;
+    private JPasswordField txtPassword;
+    private JComboBox cbStatus;
+    private JButton btnOK;
+    private JButton btnCancel;
+}
