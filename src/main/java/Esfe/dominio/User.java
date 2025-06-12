@@ -21,7 +21,7 @@ public class User {
         this.status = status;
     }
 
-    public User(int id, String admin, String number, String mail)
+
 
 
     public int getId() {
