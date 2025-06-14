@@ -4,24 +4,9 @@ import java.sql.Connection; // Representa una conexión a la base de datos.
 import java.sql.DriverManager; // Gestiona los drivers JDBC y establece conexiones.
 import java.sql.SQLException; // Representa errores específicos de la base de datos.
 
-/**
- * Esta clase se encarga de gestionar la conexión a la base de datos SQL Server utilizando JDBC.
- * Implementa el patrón Singleton para asegurar que solo exista una única instancia
- * de la clase y, por lo tanto, una única conexión a la base de datos compartida.
- */
 public class ConnectionManager {
-    /**
-     * Define la cadena de conexión a la base de datos. Contiene la información
-     * necesaria para establecer la comunicación con el servidor de base de datos.
-     *
-     * - jdbc:sqlserver://... : Indica el tipo de conexión (JDBC para SQL Server).
-     * - DESKTOP-9KSCT6V\\SQLEXPRESS01:1433 : Dirección del servidor y puerto.
-     * - encrypt=true : Indica si la conexión debe ser encriptada.
-     * - database=Inventario : Especifica la base de datos a la que se quiere conectar.
-     * - trustServerCertificate=true : Indica que se confíe en el certificado del servidor (para entornos de desarrollo).
-     * - user=dev : Nombre de usuario para la autenticación.
-     * - password=dev : Contraseña para la autenticación.
-     */
+
+
     private static final String STR_CONNECTION = "jdbc:sqlserver://LISENA\\MSSQLSERVER01:1433; " +
             "encrypt=true; " +
             "database=SmartNovast; " +
@@ -29,21 +14,13 @@ public class ConnectionManager {
             "user=LAKJ2025;" +
             "password=LAKJ12345";
 
-    /**
-     * Representa la conexión activa a la base de datos. Inicialmente es nula.
-     */
+
     private Connection connection;
 
-    /**
-     * Única instancia de la clase JDBCConnectionManager (para el patrón Singleton).
-     * Se inicializa a null y se crea solo cuando se necesita por primera vez.
-     */
+
     private static ConnectionManager instance;
 
-    /**
-     * Constructor privado para evitar la creación de instancias directamente desde fuera de la clase.
-     * Esto es fundamental para el patrón Singleton.
-     */
+
     private ConnectionManager() {
         this.connection = null;
         try {
