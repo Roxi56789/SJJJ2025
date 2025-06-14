@@ -13,7 +13,7 @@ class ConnectionManagerTest {
     ConnectionManager connectionManager;
     @BeforeEach
     void setUp() throws SQLException {
-        // Se ejecuta antes de cada método de prueba.
+        // Se ejecuta antes de cada método de prueba
         // Inicializa el ConnectionManager.
         connectionManager = ConnectionManager.getInstance();
     }

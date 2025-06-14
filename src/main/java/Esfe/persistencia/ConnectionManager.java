@@ -7,12 +7,14 @@ import java.sql.SQLException; // Representa errores específicos de la base de d
 public class ConnectionManager {
 
 
-    private static final String STR_CONNECTION = "jdbc:sqlserver://LISENA\\MSSQLSERVER01:1433; " +
-            "encrypt=true; " +
-            "database=SmartNovast; " +
-            "trustServerCertificate=true;" +
-            "user=LAKJ2025;" +
-            "password=LAKJ12345";
+    private static final String STR_CONNECTION =
+            "jdbc:sqlserver:DESKTOP-GLJR0B3:1433;" +
+                    "encrypt=true;" +
+                    "database=SmartNovast;" +
+                    "trustServerCertificate=true;" +
+                    "user=LAKJ2025;" +
+                    "password=LAKJ12345;";
+
 
 
     private Connection connection;
@@ -82,14 +84,6 @@ public class ConnectionManager {
         }
     }
 
-    /**
-     * Este método estático y sincronizado (`synchronized`) implementa el patrón Singleton.
-     * Devuelve la única instancia de JDBCConnectionManager. Si la instancia aún no existe,
-     * la crea antes de devolverla. La sincronización asegura que la creación de la instancia
-     * sea segura en entornos multihilo (que varios hilos no intenten crear la instancia al mismo tiempo).
-     *
-     * @return La única instancia de JDBCConnectionManager.
-     */
     public static synchronized ConnectionManager getInstance() {
         // Verifica si la instancia ya ha sido creada.
         if (instance == null) {
