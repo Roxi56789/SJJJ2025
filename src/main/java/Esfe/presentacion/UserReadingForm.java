@@ -19,6 +19,13 @@ public class UserReadingForm extends JDialog {
     private JTable tableUsers;
     private JButton btnUpdate;
     private JButton btnDelete;
+    private JTextField textField1;
+    private JButton button1;
+    private JTable table1;
+    private JButton button3;
+    private JButton button2;
+
+
 
     private UserDAO userDAO; // Instancia de UserDAO para realizar operaciones de base de datos de usuarios.
     private MainForm mainForm; // Referencia a la ventana principal de la aplicación.
