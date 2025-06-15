@@ -15,14 +15,16 @@ public class UserWriteForm extends JDialog {
     private JTextField txtEmail;
     private JPasswordField txtPassword;
     private JComboBox cbStatus;
-    private JButton btnOk;
+    private JButton btnOK;
     private JButton btnCancel;
-    private JLabel lbPassword;
+    private JLabel lblPassword;
+    ;
 
     private UserDAO userDAO; // Instancia de la clase UserDAO para interactuar con la base de datos de usuarios.
     private MainForm mainForm; // Referencia a la ventana principal de la aplicación.
     private CUD cud; // Variable para almacenar el tipo de operación (Create, Update, Delete) que se está realizando en este formulario.
     private User en; // Variable para almacenar el objeto User que se está creando, actualizando o eliminando.
+    private JComponent lbPassWord;
 
 
     // Constructor de la clase UserWriteForm. Recibe la ventana principal, el tipo de operación CUD y un objeto User como parámetros.
@@ -40,7 +42,7 @@ public class UserWriteForm extends JDialog {
         // Agrega un ActionListener al botón 'btnCancel' para cerrar la ventana actual (UserWriteForm).
         btnCancel.addActionListener(s -> this.dispose());
         // Agrega an ActionListener to the 'btnOk' to trigger the save/update/delete action
-        btnOk.addActionListener(s -> ok());
+        btnOK.addActionListener(s -> ok());
     }
 
     private void init() {
@@ -53,19 +55,19 @@ public class UserWriteForm extends JDialog {
                 // Si la operación es de creación, establece el título de la ventana como "Crear Usuario".
                 setTitle("Crear Usuario");
                 // Establece el texto del botón de acción principal (btnOk) como "Guardar".
-                btnOk.setText("Guardar");
+                btnOK.setText("Guardar");
                 break;
             case UPDATE:
                 // Si la operación es de actualización, establece el título de la ventana como "Modificar Usuario".
                 setTitle("Modificar Usuario");
                 // Establece el texto del botón de acción principal (btnOk) como "Guardar".
-                btnOk.setText("Guardar");
+                btnOK.setText("Guardar");
                 break;
             case DELETE:
                 // Si la operación es de eliminación, establece el título de la ventana como "Eliminar Usuario".
                 setTitle("Eliminar Usuario");
                 // Establece el texto del botón de acción principal (btnOk) como "Eliminar".
-                btnOk.setText("Eliminar");
+                btnOK.setText("Eliminar");
                 break;
         }
 
@@ -121,7 +123,7 @@ public class UserWriteForm extends JDialog {
             // Oculta el campo de contraseña 'txtPassword'.
             txtPassword.setVisible(false);
             // Oculta la etiqueta de la contraseña 'lbPassword'.
-            lbPassword.setVisible(false);
+            lblPassword.setVisible(false);
         }
     }
 

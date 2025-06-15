@@ -2,13 +2,12 @@ package Esfe.presentacion;
 
 import Esfe.dominio.User; // Importa la clase User, que probablemente representa un usuario en el sistema.
 import Esfe.persistencia.UserDAO; // Importa la interfaz o clase UserDAO, que define o implementa el acceso a datos para la entidad User.
-
 import javax.swing.*; // Importa el paquete javax.swing, que proporciona clases para construir interfaces gráficas de usuario (GUIs) en Java.
 
 
 public class ChangePasswordForm extends JDialog {
     private JPanel mainPanel;
-    private JTextField txtEmail;
+    private JTextField textEmail; // Esto es lo que espera
     private JTextField txtPassword;
     private JButton btnChangePassword;
 
@@ -19,7 +18,7 @@ public class ChangePasswordForm extends JDialog {
     public ChangePasswordForm(MainForm mainForm) {
         this.mainForm = mainForm; // Asigna la instancia de MainForm recibida a la variable local.
         userDAO = new UserDAO(); // Crea una nueva instancia de UserDAO al instanciar este formulario.
-        txtEmail.setText(mainForm.getUserAutenticate().getEmail()); // Pre-carga el campo de correo electrónico con el email del usuario autenticado en la ventana principal.
+        textEmail.setText(mainForm.getUserAutenticate().getEmail()); // Pre-carga el campo de correo electrónico con el email del usuario autenticado en la ventana principal.
         setContentPane(mainPanel); // Establece el panel principal como el contenido de este diálogo.
         setModal(true); // Hace que este diálogo sea modal, lo que significa que bloquea la interacción con la ventana principal hasta que se cierre.
         setTitle("Cambiar password"); // Establece el título de la ventana del diálogo.
