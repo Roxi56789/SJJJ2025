@@ -11,7 +11,7 @@ import Esfe.utils.passwordHasher; // Clase utilitaria para el manejo seguro de c
 public class UserDAO {
     private ConnectionManager conn; // Objeto para gestionar la conexión con la base de datos.
     private PreparedStatement ps;   // Objeto para ejecutar consultas SQL preparadas.
-    private ResultSet rs;           // Objeto para almacenar el resultado del resultado de una consulta SQL.
+    private ResultSet rs;           // Objeto para almacenar el resultado de una consulta SQL.
 
     public UserDAO(){
         conn = ConnectionManager.getInstance();
@@ -34,10 +34,9 @@ public class UserDAO {
         try{
             // Preparar la sentencia SQL para la inserción de un nuevo usuario.
             // Se especifica que se retornen las claves generadas automáticamente.
-            // CORRECCIÓN: 'Rol' cambiado a 'Status' para coincidir con la columna esperada.
-            ps = conn.connect().prepareStatement(
+            PreparedStatement ps = conn.connect().prepareStatement(
                     "INSERT INTO " +
-                            "Usuario (Nombre, Password, Correo, Status)" +
+                            "Users (name, passwordHash, email, status)" +
                             "VALUES (?, ?, ?, ?)",
                     java.sql.Statement.RETURN_GENERATED_KEYS
             );
@@ -65,24 +64,13 @@ public class UserDAO {
                     throw new SQLException("Creating user failed, no ID obtained.");
                 }
             }
-            // ps.close() se manejará en el bloque finally para asegurar su cierre.
+            ps.close(); // Cerrar la sentencia preparada para liberar recursos.
         }catch (SQLException ex){
             // Capturar cualquier excepción SQL que ocurra durante el proceso.
-            //throw new SQLException("Error al crear el usuario: " + ex.getMessage(), ex);
+            throw new SQLException("Error al crear el usuario: " + ex.getMessage(), ex);
         } finally {
-            // Bloque finally para asegurar que los recursos se liberen, incluso si hay excepciones.
-            try {
-                if (ps != null) ps.close(); // Cerrar PreparedStatement si no es null.
-            } catch (SQLException e) {
-                System.err.println("Error al cerrar PreparedStatement en create(): " + e.getMessage());
-                // No relanzar para no ocultar la excepción original si la hubo.
-            }
-            // Aunque 'rs' no se usa directamente en este try, es buena práctica incluirlo si se usara.
-            // try {
-            //     if (rs != null) rs.close();
-            // } catch (SQLException e) {
-            //     System.err.println("Error al cerrar ResultSet en create(): " + e.getMessage());
-            // }
+            // Bloque finally para asegurar que los recursos se liberen.
+            ps = null;         // Establecer la sentencia preparada a null.
             conn.disconnect(); // Desconectar de la base de datos.
         }
         return res; // Retornar el usuario creado (con su ID asignado) o null si hubo un error.
@@ -186,7 +174,7 @@ public class UserDAO {
         try {
             // Preparar la sentencia SQL para buscar usuarios por nombre (usando LIKE para búsqueda parcial).
             ps = conn.connect().prepareStatement("SELECT id, name, email, status " +
-                    "FROM Usuario " + // <-- NOTA: Aquí usas 'Usuario', en otros métodos usas 'Users'
+                    "FROM Users " +
                     "WHERE name LIKE ?");
 
             // Establecer el valor del parámetro en la sentencia preparada.
@@ -199,7 +187,7 @@ public class UserDAO {
             // Iterar a través de cada fila del resultado.
             while (rs.next()){
                 // Crear un nuevo objeto User para cada registro encontrado.
-                User user = new User("admin", "12345", "admin@gmail.com"); // Considera si estos valores por defecto son apropiados o si deberías usar un constructor vacío si User lo permite.
+                User user = new User();
                 // Asignar los valores de las columnas a los atributos del objeto User.
                 user.setId(rs.getInt(1));       // Obtener el ID del usuario.
                 user.setName(rs.getString(2));   // Obtener el nombre del usuario.
@@ -232,12 +220,12 @@ public class UserDAO {
      * durante la obtención del usuario.
      */
     public User getById(int id) throws SQLException{
-        User user  = new User("admin", "12345", "admin@gmail.com"); // Inicializar un objeto User que se retornará. // Considera si estos valores por defecto son apropiados.
+        User user  = new User(); // Inicializar un objeto User que se retornará.
 
         try {
             // Preparar la sentencia SQL para seleccionar un usuario por su ID.
             ps = conn.connect().prepareStatement("SELECT id, name, email, status " +
-                    "FROM Users " + // <-- NOTA: Aquí usas 'Users', en 'create' y 'search' usas 'Usuario'
+                    "FROM Users " +
                     "WHERE id = ?");
 
             // Establecer el valor del parámetro en la sentencia preparada (el ID a buscar).
@@ -287,13 +275,13 @@ public class UserDAO {
      */
     public User authenticate(User user) throws SQLException{
 
-        User userAutenticate = new User("admin", "12345", "admin@gmail.com"); // Inicializar un objeto User para almacenar el usuario autenticado. // Considera si estos valores por defecto son apropiados.
+        User userAutenticate = new User(); // Inicializar un objeto User para almacenar el usuario autenticado.
 
         try {
             // Preparar la sentencia SQL para seleccionar un usuario por su correo electrónico,
             // contraseña hasheada y estado activo (status = 1).
             ps = conn.connect().prepareStatement("SELECT id, name, email, status " +
-                    "FROM Users " + // <-- NOTA: Aquí usas 'Users'
+                    "FROM Users " +
                     "WHERE email = ? AND passwordHash = ? AND status = 1");
 
             // Establecer los valores de los parámetros en la sentencia preparada.
@@ -344,7 +332,7 @@ public class UserDAO {
         try{
             // Preparar la sentencia SQL para actualizar solo la columna 'passwordHash' de un usuario.
             ps = conn.connect().prepareStatement(
-                    "UPDATE Users " + // <-- NOTA: Aquí usas 'Users'
+                    "UPDATE Users " +
                             "SET passwordHash = ? " +
                             "WHERE id = ?"
             );
