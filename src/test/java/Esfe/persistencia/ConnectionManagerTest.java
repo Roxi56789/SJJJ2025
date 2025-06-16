@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection; // Importa la clase Connection del paquete java.sql, que se utiliza para establecer una conexión con la base de datos.
 import java.sql.SQLException; // Importa la clase SQLException del paquete java.sql, que se utiliza para manejar excepciones relacionadas con operaciones de base de datos.
 
-import static org.junit.jupiter.api.Assertions.*; // Importa todos los métodos estáticos de la clase Assertions del paquete org.junit.jupiter.api. Esto proporciona métodos para realizar aserciones en las pruebas unitarias, como assertEquals, assertTrue, etc.
+import static org.junit.jupiter.api.Assertions.*; // Importa todos los métodos estáticos de la clase Assertions del paquete org.junit.jupiter.api. Esto proporciona métodos para realizar aserciones en las pruebas unitarias, como assertEquals, assertTrue, e
 
 class ConnectionManagerTest {
     ConnectionManager connectionManager;
     @BeforeEach
     void setUp() throws SQLException {
-        // Se ejecuta antes de cada método de prueba.
+        // Se ejecuta antes de cada método de prueba
         // Inicializa el ConnectionManager.
         connectionManager = ConnectionManager.getInstance();
     }

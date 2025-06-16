@@ -36,7 +36,7 @@ public class UserDAO {
             // Se especifica que se retornen las claves generadas automáticamente.
             PreparedStatement ps = conn.connect().prepareStatement(
                     "INSERT INTO " +
-                            "Usuario (Nombre, Password, Correo, Rol)" +
+                            "Users (name, passwordHash, email, status)" +
                             "VALUES (?, ?, ?, ?)",
                     java.sql.Statement.RETURN_GENERATED_KEYS
             );
@@ -68,7 +68,6 @@ public class UserDAO {
             ps.close(); // Cerrar la sentencia preparada para liberar recursos.
         }catch (SQLException ex){
             // Capturar cualquier excepción SQL que ocurra durante el proceso.
-
             throw new SQLException("Error al crear el usuario: " + ex.getMessage(), ex);
         } finally {
             // Bloque finally para asegurar que los recursos se liberen.
@@ -176,7 +175,7 @@ public class UserDAO {
         try {
             // Preparar la sentencia SQL para buscar usuarios por nombre (usando LIKE para búsqueda parcial).
             ps = conn.connect().prepareStatement("SELECT id, name, email, status " +
-                    "FROM Usuario " +
+                    "FROM Users " +
                     "WHERE name LIKE ?");
 
             // Establecer el valor del parámetro en la sentencia preparada.
@@ -189,7 +188,7 @@ public class UserDAO {
             // Iterar a través de cada fila del resultado.
             while (rs.next()){
                 // Crear un nuevo objeto User para cada registro encontrado.
-                User user = new User("admin", "12345", "admin@gmail.com");
+                User user = new User();
                 // Asignar los valores de las columnas a los atributos del objeto User.
                 user.setId(rs.getInt(1));       // Obtener el ID del usuario.
                 user.setName(rs.getString(2));   // Obtener el nombre del usuario.
@@ -222,7 +221,7 @@ public class UserDAO {
      * durante la obtención del usuario.
      */
     public User getById(int id) throws SQLException{
-        User user  = new User("admin", "12345", "admin@gmail.com"); // Inicializar un objeto User que se retornará.
+        User user  = new User(); // Inicializar un objeto User que se retornará.
 
         try {
             // Preparar la sentencia SQL para seleccionar un usuario por su ID.
@@ -277,7 +276,7 @@ public class UserDAO {
      */
     public User authenticate(User user) throws SQLException{
 
-        User userAutenticate = new User("admin", "12345", "admin@gmail.com"); // Inicializar un objeto User para almacenar el usuario autenticado.
+        User userAutenticate = new User(); // Inicializar un objeto User para almacenar el usuario autenticado.
 
         try {
             // Preparar la sentencia SQL para seleccionar un usuario por su correo electrónico,
