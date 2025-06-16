@@ -6,7 +6,7 @@ import java.sql.SQLException; // Representa errores específicos de la base de d
 
 public class ConnectionManager {
 
-    private static final String STR_CONNECTION = "jdbc:sqlserver://DESKTOP-GLJR0B3 LAPTOP-TNGKKKJS:1433; "  +
+    private static final String STR_CONNECTION = "jdbc:sqlserver://DESKTOP-GLJR0B3:1433; "  +
             "encrypt=true; " +
             "database=SmartNovast; " +
             "trustServerCertificate=true;" +
