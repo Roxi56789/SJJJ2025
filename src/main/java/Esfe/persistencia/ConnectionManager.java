@@ -1,8 +1,8 @@
 package Esfe.persistencia;
 
-import java.sql.Connection; // Representa una conexión a la base de datos.
-import java.sql.DriverManager; // Gestiona los drivers JDBC y establece conexiones.
-import java.sql.SQLException; // Representa errores específicos de la base de datos.
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * Esta clase se encarga de gestionar la conexión a la base de datos SQL Server utilizando JDBC.

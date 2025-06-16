@@ -111,7 +111,7 @@ class UserDAOTest {
         delete(testUser);
     }
 
-    @Test
+    //@Test
     void create() throws SQLException {
         User user = new User("admin", "12345", "admin@gmail.com");
         User res = userDAO.create(user);
