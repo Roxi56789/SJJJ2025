@@ -6,6 +6,7 @@ import Esfe.dominio.User; // Importa la clase User desde el paquete esfe.dominio
 public class MainForm extends JFrame {
 
     private User userAutenticate; // Declaración de una variable de instancia llamada 'userAutenticate' de tipo User. Esta variable se utilizará para almacenar la información del usuario que ha sido autenticado en el sistema.
+    private JPanel btnCreate;
 
     public User getUserAutenticate() {
         return userAutenticate;
@@ -53,7 +54,7 @@ public class MainForm extends JFrame {
         itemSalir.addActionListener(e -> System.exit(0)); // Agrega un ActionListener al elemento "Salir". Cuando se hace clic, termina la ejecución de la aplicación (cierra la JVM).
 
 
-        // Menú "Matenimiento"
+        // Menú "Mantenimiento"
         JMenu menuMantenimiento = new JMenu("Mantenimientos"); // Crea un nuevo menú llamado "Mantenimientos".
         menuBar.add(menuMantenimiento); // Agrega el menú "Mantenimientos" a la barra de menú.
 
