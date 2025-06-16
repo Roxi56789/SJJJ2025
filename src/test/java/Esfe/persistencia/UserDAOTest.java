@@ -12,7 +12,6 @@ import java.sql.SQLException;             // Clase para manejar excepciones rela
 import static org.junit.jupiter.api.Assertions.*; // Importación estática de métodos de aserción de JUnit 5 para verificar el comportamiento esperado en las pruebas.
 
 
-
 class UserDAOTest {
     private UserDAO userDAO; // Instancia de la clase UserDAO que se va a probar.
 
@@ -181,6 +180,7 @@ class UserDAOTest {
     }
     @Test
     void createUser() throws SQLException {
+        // Corrected User constructor call to match the 5-argument constructor
         User user = new User(0, "admin", "12345", "admin@gmail.com", (byte) 1);
         User res = userDAO.create(user);
         assertNotEquals(res,null);

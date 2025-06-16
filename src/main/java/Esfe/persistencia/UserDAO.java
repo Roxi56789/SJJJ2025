@@ -1,12 +1,12 @@
 package Esfe.persistencia;
 
-import java.sql.PreparedStatement; // Clase para ejecutar consultas SQL preparadas, previniendo inyecciones SQL.
-import java.sql.ResultSet;        // Interfaz para representar el resultado de una consulta SQL.
-import java.sql.SQLException;     // Clase para manejar errores relacionados con la base de datos SQL.
-import java.util.ArrayList;       // Clase para crear listas dinámicas de objetos.
+import Esfe.dominio.User;
+import Esfe.utils.passwordHasher;
 
-import Esfe.dominio.User;        // Clase que representa la entidad de usuario en el dominio de la aplicación.
-import Esfe.utils.passwordHasher; // Clase utilitaria para el manejo seguro de contraseñas (hash, verificación).
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserDAO {
     private ConnectionManager conn; // Objeto para gestionar la conexión con la base de datos.
@@ -42,6 +42,7 @@ public class UserDAO {
             );
             // Establecer los valores de los parámetros en la sentencia preparada.
             ps.setString(1, user.getName()); // Asignar el nombre del usuario.
+            String str =passwordHasher.hashPassword(user.getPasswordHash());
             ps.setString(2, passwordHasher.hashPassword(user.getPasswordHash())); // Hashear la contraseña antes de guardarla.
             ps.setString(3, user.getEmail()); // Asignar el correo electrónico del usuario.
             ps.setByte(4, user.getStatus());   // Asignar el estado del usuario.
